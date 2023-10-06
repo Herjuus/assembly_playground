@@ -1,16 +1,17 @@
 section .bss
 	var1: resb
 
-global _main
-
 section .text
+  global _main
+
   _main:
     mov esi, 5
 		mov [var1], esi
-    call PrintNumber
 
-    mov rax, 0x2000001
-    mov rdi, 0
+		call PrintNumber
+
+    mov eax, 0x2000001
+    mov edi, 0
     syscall
     
 	PrintNumber:
@@ -22,3 +23,7 @@ section .text
 		mov ebx, 1
 		mov ecx, var1
     mov edx, 10
+
+    int 80h
+
+    ret
